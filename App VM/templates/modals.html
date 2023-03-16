@@ -1,0 +1,250 @@
+<!-- Add a Record Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addModalLabel">Please enter the new employee information</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-hover table-bordered border-primary">
+                        <thead class="table-success table-bordered">
+                            <tr>
+                                <th scope="col">Record Fields</th>
+                                <th scope="col">Information</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <form>
+                                <tr>
+                                    <td ><label for="emp_id"></label>Employee Id.</label></td>
+                                    <td><input type="text" class="form-control text-muted" placeholder="4 digit unique no." id="emp_id" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="first_name">First Name</label></td>
+                                    <td><input type="text" class="form-control text-muted" placeholder="First Name" id="first_name" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="last_name"></label>Last Name</label></td>
+                                    <td><input type="text" class="form-control text-muted" placeholder="Last Name" id="last_name" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="ph_no"></label>Phone Number</label></td>
+                                    <td><input type="text" class="form-control text-muted" placeholder="10 digit phone no." id="ph_no" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="home_addr"></label>Home Address</label></td>
+                                    <td><input type="text" class="form-control text-muted" id="home_addr" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="st_addr"></label>Street Address</label></td>
+                                    <td><input type="text" class="form-control text-muted" id="st_addr" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="gender"></label>Gender</label></td>
+                                    <td>
+                                        <select name="gender" id="gender">
+                                            <option value="Agender">Agender</option>
+                                            <option value="Bigender">Bigender</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Genderfluid">Genderfluid</option>
+                                            <option value="Genderqueer">Genderqueer</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Non-binary">Non-binary</option>
+                                            <option value="Polygender">Polygender</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="job_type"></label>Job Type</label></td>
+                                    <td><input type="text" class="form-control text-muted" id="job_type" /></td>
+                                </tr>
+                            </form>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+                    <button type="button" name="add_record_button" id="add_record_button" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Information Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="infoModalLabel">Information about the Application</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <strong>This application has three parts.</strong><br/>
+                    
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Database Tier</div>
+                                A <a href="https://www.mongodb.com/" target="_blank" >MongoDB</a> database is serving as a backend database. Database server is accessible through REST API only. 
+                                Details of the operations supported are accessible through "http://DB_VM_IP/docs" or "http://DB_VM_IP/redoc"
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Application Tier</div>
+                                App server is running a <a href="https://gunicorn.org/" target="_blank" >Python Flask</a> application and served by <a href="https://flask.palletsprojects.com/en/2.2.x/" target="_blank" >Gunicorn</a> server. It also uses <a href="https://datatables.net/" target="_blank" >Datatables</a> to showcase the table functionalities.
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                            <div class="fw-bold">Web Tier</div>
+                                Web tier has <a href="https://www.nginx.com/" target="_blank" >Nginx</a> as webserver. It is configured as reverse proxy and pointing to app server.
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="myEditModal" tabindex="-1" aria-labelledby="myEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="myEditModalLabel">Please modify the current information</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-hover table-bordered border-primary">
+                        <thead class="table-success table-bordered">
+                            <tr>
+                                <th scope="col">Record Fields</th>
+                                <th scope="col">Information</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <td >Employee Id.</td>
+                                <td class="emp_id"> <b><span></span> </b> </td>
+                            </tr>
+                            <form>
+                                <tr>
+                                    <td ><label for="first_name">First Name</label></td>
+                                    <td><input type="text" class="form-control fw-lighter" id="edit-first_name" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="last_name"></label>Last Name</label></td>
+                                    <td><input type="text" class="form-control fw-lighter" id="edit-last_name" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="ph_no"></label>Phone Number</label></td>
+                                    <td><input type="text" class="form-control fw-lighter" id="edit-ph_no" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="home_addr"></label>Home Address</label></td>
+                                    <td><input type="text" class="form-control fw-lighter" id="edit-home_addr" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="st_addr"></label>Street Address</label></td>
+                                    <td><input type="text" class="form-control fw-lighter" id="edit-st_addr" /></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="gender"></label>Gender</label></td>
+                                    <td>
+                                        <select name="gender" id="edit-gender">
+                                            <option value="Agender">Agender</option>
+                                            <option value="Bigender">Bigender</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Genderfluid">Genderfluid</option>
+                                            <option value="Genderqueer">Genderqueer</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Non-binary">Non-binary</option>
+                                            <option value="Polygender">Polygender</option>
+                                        </select>
+                                        {# <input type="text" class="form-control" id="edit-gender" /> #}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="job_type"></label>Job Type</label></td>
+                                    <td><input type="text" class="form-control text-muted" id="edit-job_type" /></td>
+                                </tr>
+                            </form>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <a  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+                    <button type="button" name="edit_record_button" id="edit_record_button" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="myDeleteModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Do you want to delete the following Record?</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered border-primary" >
+                        <thead class="table-success table-bordered">
+                            <tr>
+                            <th scope="col">Record Fields</th>
+                            <th scope="col">Detailed Information</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <td>Employee ID</td>
+                                <td class="emp_id"><b><span></span> </b></div>
+                            </tr>
+                            <tr>
+                                <td>First Name</td>
+                                <td class="first_name"><span></span> </div>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td class="last_name"><span></span> </div>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td class="ph_no"><span></span> </div>
+                            </tr>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td class="home_addr"><span></span> </div>
+                            </tr>
+                            <tr>
+                                <td>Home Address</td>
+                                <td class="st_addr"><span></span> </div>
+                            </tr>
+                            <tr>
+                                <td>Street Address</td>
+                                <td class="gender"><span></span> </div>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td class="job_type"><span></span></div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+                    <button type="button" name="delete_record_button" id="delete_record_button" class="btn btn-danger">Submt</button>
+                </div>
+            </div>
+        </div>
+    </div>

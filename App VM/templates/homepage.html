@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block container %}   
+    <!-- Body containing table -->
+    <section id="table">
+        <h3 class="text-center fw-normal text-primary">Employee Records Table</h3>
+        <div class="container-fluid" id="employee-table-container">
+            <div class="row" id="employee-table-row">
+                <div class="col " id="table-column">
+                    <div class="table-responsive-md">
+                            <!-- Actual table here -->
+                        <table class="table table-striped table-hover  table-sm caption-top" id="myTable">
+                            <caption>List of Employees with details</caption>
+                            <thead class="table-info table-group-divider">
+                            <tr>
+                                <th scope="col">Emp. ID.</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Home Address</th>
+                                <th scope="col">Street Address</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Job Title</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table-group-divider table-body-font align-middle">
+                            
+                            {% for employee in employee_data %}
+                            
+                                <tr>
+                                <th scope="row" class="fs-6">{{ employee.emp_id }}</th>
+                                {# <td class="emp_id">{{ employee.emp_id }}</td> #}
+                                <td class="first_name ">{{ employee.first_name }}</td>
+                                <td class="last_name ">{{ employee.last_name }}</td>
+                                <td class="email ">{{ employee.email }}</td>
+                                <td class="ph_no ">{{ employee.ph_no }}</td>
+                                <td class="home_addr ">{{ employee.home_addr }}</td>
+                                <td class="st_addr ">{{ employee.st_addr}}</td>
+                                <td class="gender ">{{ employee.gender }}</td>
+                                <td class="job_type ">{{ employee.job_type }}</td>
+                                
+                                <td><button type="button" class="btn btn-sm btn-link edit-button"  ><img src="/static/images/edit.svg" width="24" height="28"></button></td>
+                                <td><button type="button" class="btn btn-sm btn-link delete-button" ><img src="/static/images/delete.png" width="24" height="28"></button></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
