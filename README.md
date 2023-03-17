@@ -59,6 +59,12 @@ Overall I chose Alpine linux for all other component except database VM.
 
 - Size of the VM: Alpine linux is much smaller in size in comparison with Ubuntu VM. This suits perfectly the app and the web vm's but for database vm we need more libraries. With all the libraries size becomes considerably larger for Alpine Linux. Hence Ubuntu was chosen as DB VM.
 
+**Detailed Structure:**
+Provided below are the detailed structure of the components.
+
+![App Architecture](https://user-images.githubusercontent.com/11576892/225925666-ca17696b-68dd-4510-a86b-87368fa3e7b3.gif)
+
+
 **How to:**
 
 Provided below are the details of the configuration. Since here I am providing all the program files, servers need to be configured as per detail below. I also plan to create a OVA file with everything pre-configured. That would not require the below configurations.
@@ -288,6 +294,9 @@ server {
 Now the application can be accessed by going to `<http://<web-server-ip> or fqdn>` Swagger UI is available for DB at `<http://<db-vm-ip> or fqdn>/docs `or `<http://<db-vm-ip> or fqdn>/redoc`
 
 **Sample Screenshots**
+
+![Demo App-1](https://user-images.githubusercontent.com/11576892/225924166-a7967479-4f92-4c0c-950b-083f627611da.gif)
+
 
 The application UI is self explanatory. Explore the options and hope you will like it.
 
