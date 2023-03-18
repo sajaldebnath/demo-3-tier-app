@@ -311,15 +311,11 @@ Provided below are few sample screenshots.
 
 **Swagger UI and Redocs**
 
-
-
-
+![Documentation](https://user-images.githubusercontent.com/11576892/226115519-5c1baf4e-f780-4217-932f-37c3aa1058db.gif)
 
 **Application UI**
 
-
-
-
+![App Screenshots](https://user-images.githubusercontent.com/11576892/226115529-2eec25bd-1746-47f1-a7f3-4c92d2f8fb5e.gif)
 
 The application UI is self explanatory. Explore the options and hope you will like it.
 
