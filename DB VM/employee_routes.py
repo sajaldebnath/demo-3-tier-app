@@ -42,15 +42,15 @@ async def add_employee_data(employee: EmployeeSchema = Body(...)): # Function to
 async def get_employees():
     employees = await retrieve_employees() # Calling on the retrieve_employees function defined in the employee_database.py file
     if employees:
-        return ResponseModel(employees, "Employees data retrieved successfully")
-    return ResponseModel(employees, "Empty list returned")
+        return ResponseModel(employees, 200, "Employees data retrieved successfully")
+    return ResponseModel(employees, 404, "Empty list returned")
 
 # Router for GET operation. Returns the record for a single employee
 @router.get("/{id}", status_code=200, response_description="Employee data retrieved")
 async def get_employee_data(id: int):
     employee = await retrieve_employee(id) # Calling on the retrieve_employee function defined in the employee_database.py file
     if employee:
-        return ResponseModel(employee, "Employee data retrieved successfully")
+        return ResponseModel(employee, 200, "Employee data retrieved successfully")
     return ErrorResponseModel("An error occurred.", 404, "Employee doesn't exist.")
 
 # Router for PUT operation. Updates the record for a single employee
@@ -60,7 +60,8 @@ async def update_employee_data(id: int, req: UpdateEmployeeSchema = Body(...)):
     updated_employee = await update_employee(id, req) # Calling on the update_employee function defined in the employee_database.py file
     if updated_employee:
         return ResponseModel(
-            "Employee with ID: {} name update is successful".format(id),
+            "Employee with ID: {} update is successful".format(id), 
+            201,
             "Employee name updated successfully",
         )
     return ErrorResponseModel(
@@ -75,7 +76,7 @@ async def delete_employee_data(id: int):
     deleted_employee = await delete_employee(id) # Calling on the delete_employee function defined in the employee_database.py file
     if deleted_employee:
         return ResponseModel(
-            "Employee with ID: {} removed".format(id), "Employee deleted successfully"
+            "Employee with ID: {} removed".format(id), 200, "Employee deleted successfully"
         )
     return ErrorResponseModel(
         "An error occurred", 404, "Employee with id {0} doesn't exist".format(id)

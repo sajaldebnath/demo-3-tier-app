@@ -14,23 +14,9 @@ from bson.objectid import ObjectId
 
 MONGO_DETAILS = "mongodb://localhost:27017"  # Asssuming mongodb is running in local server. Change for a remote DB server
 
-
-# async def get_server_info():
-#     # replace this with your MongoDB connection string
-#     conn_str = "mongodb://localhost:27017"
-#     # set a 5-second connection timeout
-#     client = motor.motor_asyncio.AsyncIOMotorClient(conn_str, serverSelectionTimeoutMS=5000)
-#     try:
-#         print(await client.server_info())
-#     except Exception:
-#         print("Unable to connect to the server.")
-# loop = asyncio.get_event_loop()
-# loop.run_until_complete(get_server_info())
-
-
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS) # Defining the database access client
 
-database = client.employee_DB # Connecting to the employee_DB database. Change the database name for connecting to another database
+database = client.employees_DB # Connecting to the employee_DB database. Change the database name for connecting to another database
 
 employee_collection = database.get_collection("employees") # Getting the employees collection. Change the collection name to connect to another
 
