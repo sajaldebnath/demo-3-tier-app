@@ -24,6 +24,7 @@ jQuery(document).ready(function($){
     } );
     
     
+
     // Handling the edit function
     // This will activate when the edit button in the table row clicked
     $("#myTable").on("click", ".edit-button", function(){  
@@ -141,7 +142,9 @@ jQuery(document).ready(function($){
 
 // Adding an employee information to the database
     $('#add_record_button').click(function(){  
-        var emp_id = $('#emp_id').val();  
+        var table = $('#myTable').DataTable(); // Getting total number of rows in the table which is equal to no. of employees
+ 
+        var emp_id = table.data().count() + 1; //Getting the next number in the number of employees
         var first_name = $('#first_name').val(); 
         var last_name = $('#last_name').val();
         var email = first_name + '.' + last_name + '@acme.com';
@@ -150,7 +153,7 @@ jQuery(document).ready(function($){
         var st_addr = $('#st_addr').val(); 
         var gender = $('#gender').val(); 
         var job_type = $('#job_type').val(); 
-
+        
 
         if(emp_id != '' && first_name != '' && last_name != '' && ph_no != '' && job_type != '')  
         {  

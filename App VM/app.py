@@ -114,10 +114,10 @@ def single_employee():
         #print(response)
         
         info=response.json()
-        print(info)
+        #print(info)
 
 
-        print(response.status_code)
+        #print(response.status_code)
         if response.status_code == 201:
             json_data_all = response.json()
             json_data = json_data_all["data"]
@@ -141,7 +141,7 @@ def edit_employee_record(id):
         emp_id = request.form['emp_id']
         first_name = request.form['first_name']
         last_name = request.form['last_name']
-        email = first_name + '.' + last_name + 'acme.com'  # Email auto-generated
+        email = first_name + '.' + last_name + '@acme.com'  # Email auto-generated
         ph_no = request.form['ph_no']
         home_addr = request.form['home_addr']
         st_addr = request.form['st_addr']
