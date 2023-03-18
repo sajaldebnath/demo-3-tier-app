@@ -27,7 +27,6 @@ class EmployeeSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "emp_id": 6691,
                 "first_name": "Blanch",
                 "last_name": "Nolin",
                 "email": "Blanch.Nolin@acme.com",
@@ -41,7 +40,7 @@ class EmployeeSchema(BaseModel):
 
 
 class UpdateEmployeeSchema(BaseModel):
-    emp_id: Optional[int]
+    emp_id: int = Field(...)
     first_name: Optional[str]
     last_name: Optional[str]
     email: Optional[str]
@@ -54,7 +53,6 @@ class UpdateEmployeeSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "emp_id":3888,
                 "first_name":"Frieda",
                 "last_name":"Harman",
                 "email":"Frieda.Harman@acme.com",
