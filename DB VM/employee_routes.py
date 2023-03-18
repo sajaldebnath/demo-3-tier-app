@@ -34,7 +34,18 @@ router = APIRouter()
 async def add_employee_data(employee: EmployeeSchema = Body(...)): # Function to handle the operation
     employee = jsonable_encoder(employee)
     new_employee = await add_employee(employee) # Calling on the add_employee function defined in the employee_database.py file
-    return ResponseModel(new_employee, "Employee added successfully.")
+    # return ResponseModel(new_employee, "Employee added successfully.")
+    if new_employee:
+        return ResponseModel(
+            new_employee, 
+            
+            "Employee record added successfully",
+        )
+    return ErrorResponseModel(
+        "An error occurred",
+        404,
+        "There was an error adding the employee data.",
+    )
 
 
 # Router for GET operation. Returns the list of all employee records
@@ -42,7 +53,7 @@ async def add_employee_data(employee: EmployeeSchema = Body(...)): # Function to
 async def get_employees():
     employees = await retrieve_employees() # Calling on the retrieve_employees function defined in the employee_database.py file
     if employees:
-        return ResponseModel(employees, 200, "Employees data retrieved successfully")
+        return ResponseModel(employees, "Employees data retrieved successfully")
     return ResponseModel(employees, 404, "Empty list returned")
 
 # Router for GET operation. Returns the record for a single employee
@@ -50,7 +61,7 @@ async def get_employees():
 async def get_employee_data(id: int):
     employee = await retrieve_employee(id) # Calling on the retrieve_employee function defined in the employee_database.py file
     if employee:
-        return ResponseModel(employee, 200, "Employee data retrieved successfully")
+        return ResponseModel(employee, "Employee data retrieved successfully")
     return ErrorResponseModel("An error occurred.", 404, "Employee doesn't exist.")
 
 # Router for PUT operation. Updates the record for a single employee
@@ -60,8 +71,8 @@ async def update_employee_data(id: int, req: UpdateEmployeeSchema = Body(...)):
     updated_employee = await update_employee(id, req) # Calling on the update_employee function defined in the employee_database.py file
     if updated_employee:
         return ResponseModel(
-            "Employee with ID: {} update is successful".format(id), 
-            201,
+            # "Employee with ID: {} update is successful".format(id), 
+            updated_employee,
             "Employee name updated successfully",
         )
     return ErrorResponseModel(
@@ -76,7 +87,7 @@ async def delete_employee_data(id: int):
     deleted_employee = await delete_employee(id) # Calling on the delete_employee function defined in the employee_database.py file
     if deleted_employee:
         return ResponseModel(
-            "Employee with ID: {} removed".format(id), 200, "Employee deleted successfully"
+            "Employee with ID: {} removed".format(id), "Employee deleted successfully"
         )
     return ErrorResponseModel(
         "An error occurred", 404, "Employee with id {0} doesn't exist".format(id)
