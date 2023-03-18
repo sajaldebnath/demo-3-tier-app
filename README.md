@@ -64,7 +64,6 @@ Provided below are the detailed structure of the components.
 
 ![App Architecture](https://user-images.githubusercontent.com/11576892/225925666-ca17696b-68dd-4510-a86b-87368fa3e7b3.gif)
 
-
 **How to:**
 
 Provided below are the details of the configuration. Since here I am providing all the program files, servers need to be configured as per detail below. I also plan to create a OVA file with everything pre-configured. That would not require the below configurations.
@@ -85,6 +84,8 @@ Provided below are the details of the configuration. Since here I am providing a
     - "st\_addr": str
     - "gender": str
     - "job\_type": str
+  - In the data structure, we will auto-generate `emp_id` field. This field is not modifiable by end users. It is created while adding a new record or deleted at the time of record deletion.
+  - The combination or first_name and last_name is unique. Meaning, no two employees can have same first name and last name.
 - Install MongoDB on the VM using the [method detailed](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/) in the website.
 - After installing MongoDB, create a folder where you want to keep all the required files. For example, employee\_db.
 - Download all the files under DB VM repository and copy it over to employee\_db folder. The files under the DB VM repository are listed below:
@@ -109,7 +110,22 @@ PUT /employee/<emp_id>: to update an employee record by employee ID
 DELETE /employee/<emp_id>: to delete an employee record by employee ID
 ```
 
-- **Running NGINX+ GUNICORN + UVICORN in DB VM**. Note, the following configurations assume you have an existing user by name "user" present in the Ubuntu VM. Otherwise, replace it with your user id.
+- Before we start the application we need to import the data into MongoDB database. From Ubuntu terminal go to the folder where you downloaded all the files (e.g.  /home/user/employee_db) and run the following command:
+
+```bash
+`mongoimport --db=employees_DB --collection=employees --file=./MOCK_DATA.json --jsonArray`
+```
+
+- Next, we will set emp_id as unique and the combination of first_name and last_name as unique. So that we cannot have duplicates in these fields. For this we will log into mongsh from the terminal.
+
+```bash
+`mongosh`  
+`use employees_DB`  
+`db.employees.createIndex( { "emp_id": 1}, { unique: true} )`   
+`db.employees.createIndex( {  first_name: 1, last_name: 1 }, { unique: true } )`
+```
+
+- Running NGINX+ GUNICORN + UVICORN in DB VM**. Note, the following configurations assume you have an existing user by name "user" present in the Ubuntu VM. Otherwise, replace it with your user id.
 
 ```bash
 sudo apt install supervisor nginx -y
@@ -234,8 +250,6 @@ apk add py3-gunicorn  --no-cache
 - Copy all the files including the structure inside `/root/employee\_app` folder
 - Run gunicorn server as service in Alpine:
 
-**vi /etc/local.d/gunicorn.start**
-
 ```bash
 vi /etc/local.d/gunicorn.start
 
@@ -274,7 +288,7 @@ server {
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header Host $http_host;
                 proxy_redirect off;
-                        
+
                 if (!-f $request_filename) {
                         proxy_pass http://<app-server-ip or fqdn>:8080;
                         break;
@@ -289,13 +303,22 @@ server {
 }
 ```
 
-
-
 Now the application can be accessed by going to `<http://<web-server-ip> or fqdn>` Swagger UI is available for DB at `<http://<db-vm-ip> or fqdn>/docs `or `<http://<db-vm-ip> or fqdn>/redoc`
 
 **Sample Screenshots**
 
-![Demo App-1](https://user-images.githubusercontent.com/11576892/225924166-a7967479-4f92-4c0c-950b-083f627611da.gif)
+Provided below are few sample screenshots.
+
+**Swagger UI and Redocs**
+
+
+
+
+
+**Application UI**
+
+
+
 
 
 The application UI is self explanatory. Explore the options and hope you will like it.

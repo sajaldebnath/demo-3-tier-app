@@ -144,7 +144,14 @@ jQuery(document).ready(function($){
     $('#add_record_button').click(function(){  
         var table = $('#myTable').DataTable(); // Getting total number of rows in the table which is equal to no. of employees
  
-        var emp_id = table.data().count() + 1; //Getting the next number in the number of employees
+        var last_row = table.row(':last').data(); //Getting the last row of the table
+        //console.log(last_row);
+        //console.log(last_row.emp_id);
+        var last_emp_id = parseInt(last_row.emp_id); // Getting the last emp id and converting it into integer
+        //console.log(last_emp_id)
+      
+        var emp_id = last_emp_id + 1; // New employee will have the next id in the sequence
+        //console.log(emp_id);
         var first_name = $('#first_name').val(); 
         var last_name = $('#last_name').val();
         var email = first_name + '.' + last_name + '@acme.com';
