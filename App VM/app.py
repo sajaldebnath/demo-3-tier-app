@@ -50,7 +50,7 @@ def employees():#
          json_data = json_data_all["data"]
          employee_data = json_data[0]
          #print(json_data[0])
-         return render_template('homepage.html',employee_data=employee_data)
+         return render_template('homepage.html',employee_data=employee_data, db_fqdn=db_fqdn)
     else:
          print("Could not get employee list")
          return "Could not get employee list"
