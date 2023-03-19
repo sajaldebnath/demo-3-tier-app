@@ -15,7 +15,7 @@ import time
 import json
 
 
-db_fqdn = "10.123.10.187"  # Modify the value with the actual database server
+db_fqdn = "<DB Server IP or FQDN>"  # Modify the value with the actual database server
 api_url_base = "http://" + db_fqdn + "/employee"
 
 # Defining the app details
