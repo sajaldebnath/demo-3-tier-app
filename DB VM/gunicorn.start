@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd  /root/employee-database
+
+nohup /usr/bin/gunicorn -w 2 -b unix:emp-db.sock -m 007 -k uvicorn.workers.UvicornWorker app:app  --access-logfile /root/employee-database/logs/gunicorn-access.log --error-logfile /root/employee-database/logs/gunicorn-error.log  &

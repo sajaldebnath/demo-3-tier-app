@@ -13,9 +13,12 @@ import requests
 # Defining the Database details
 import time
 import json
+# Importing socket library
+import socket
 
 
-db_fqdn = "<DB Server IP or FQDN>"  # Modify the value with the actual database server
+
+db_fqdn = "db-vm.vercel.app"  # Modify the value with the actual database server
 api_url_base = "http://" + db_fqdn + "/employee"
 
 # Defining the app details
@@ -25,6 +28,23 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 ################### Define functions and routes ##########################
+
+# Function to display hostname and
+# IP address
+ 
+ 
+def get_Host_name_IP():
+    try:
+        host_name = socket.gethostname()
+        #host_ip = socket.gethostbyname(host_name)
+        print("Hostname :  ", host_name)
+        #print("IP : ", host_ip)
+        return host_name
+    except:
+        print("Unable to get Hostname and IP")
+        return ""
+
+
 
 # Get all the employees data
 @app.route('/')
@@ -50,7 +70,8 @@ def employees():#
          json_data = json_data_all["data"]
          employee_data = json_data[0]
          #print(json_data[0])
-         return render_template('homepage.html',employee_data=employee_data, db_fqdn=db_fqdn)
+         host_name = get_Host_name_IP()
+         return render_template('homepage.html',employee_data=employee_data, db_fqdn=db_fqdn, host_name=host_name)
     else:
          print("Could not get employee list")
          return "Could not get employee list"

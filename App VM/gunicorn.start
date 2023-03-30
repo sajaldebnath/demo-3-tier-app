@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd  /root/employee-app
+
+nohup /usr/bin/gunicorn --bind 0.0.0.0:8080 app:app --access-logfile /root/employee-app/logs/gunicorn-access.log --error-logfile /root/employee-app/logs/gunicorn-error.log  &
