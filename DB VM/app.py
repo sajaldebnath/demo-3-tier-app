@@ -58,4 +58,4 @@ app.include_router(EmployeeRouter, tags=["Employee"], prefix="/employee") # Base
 
 @app.get("/", tags=["Root"])
 async def read_root():
-    return {"message": "Welcome to this fantastic app!"}
+    return {"message": "Welcome to this 3-tier Demo Cloud Application! This is a employee records management solution."}

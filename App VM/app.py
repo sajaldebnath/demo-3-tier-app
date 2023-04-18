@@ -15,6 +15,7 @@ import time
 import json
 # Importing socket library
 import socket
+import os
 
 
 
@@ -29,6 +30,28 @@ app.config["DEBUG"] = True
 
 ################### Define functions and routes ##########################
 
+# Function to determine Web Server
+
+def get_Web_Host_name_IP():
+    try:
+        webservers = {
+        'web-server-1': 'web-01',
+        'web-server-2': 'web-02'
+        }
+
+        remote = request.remote_addr   
+        #print(remote)
+
+        if remote in webservers:
+            web_host_name = webservers[remote]
+        else:
+            web_host_name = remote
+        #print(web_host_name)
+        return web_host_name
+    except:
+        print("Unable to get Web Hostname and IP")
+        return "Unable to get Web Hostname"
+    
 # Function to display hostname and
 # IP address
  
@@ -71,7 +94,8 @@ def employees():#
          employee_data = json_data[0]
          #print(json_data[0])
          host_name = get_Host_name_IP()
-         return render_template('homepage.html',employee_data=employee_data, db_fqdn=db_fqdn, host_name=host_name)
+         web_host_name = get_Web_Host_name_IP()
+         return render_template('homepage.html',employee_data=employee_data, db_fqdn=db_fqdn, web_host_name=web_host_name, host_name=host_name)
     else:
          print("Could not get employee list")
          return "Could not get employee list"
